@@ -8,14 +8,14 @@ pipeline {
         }
         stage('Push Docker Hub'){
             steps {
-                echo "helolnkeflbb"
+                echo "test k check docker"
             }
-            steps {
-                withDockerRegistry(credentialsId: 'dockerhub', url: '') {
-                    sh label: '', script: 'docker build -t tien00113/techstack:latest .'
-                    sh label: '', script: 'docker push tien00113/techstack:latest'
-                }
-            }
+            // steps {
+            //     withDockerRegistry(credentialsId: 'dockerhub', url: '') {
+            //         sh label: '', script: 'docker build -t tien00113/techstack:latest .'
+            //         sh label: '', script: 'docker push tien00113/techstack:latest'
+            //     }
+            // }
         }
     }
 }
