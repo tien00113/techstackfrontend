@@ -19,6 +19,17 @@ pipeline {
             //         sh label: '', script: 'docker push tien00113/techstack:latest'
             //     }
             // }
+            steps {
+                script {
+                    try {
+                        def dockerVersion = sh(script: 'docker --version', returnStdout: true).trim()
+                        echo "Docker Version: ${dockerVersion}"
+                    } catch (Exception e) {
+                        echo "Docker is not installed or not found in PATH."
+                        error("Docker command failed")
+                    }
+                }
+            }
         }
     }
 }
