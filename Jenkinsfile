@@ -10,24 +10,10 @@ pipeline {
             steps {
                 echo "helolnkeflbb"
             }
-            // steps {
-            //     sh(script: 'docker --version', label: 'Check Docker version')
-            // }
-            // steps {
-            //     withDockerRegistry(credentialsId: 'dockerhub', url: '') {
-            //         sh label: '', script: 'docker build -t tien00113/techstack:latest .'
-            //         sh label: '', script: 'docker push tien00113/techstack:latest'
-            //     }
-            // }
             steps {
-                script {
-                    try {
-                        def dockerVersion = sh(script: 'docker --version', returnStdout: true).trim()
-                        echo "Docker Version: ${dockerVersion}"
-                    } catch (Exception e) {
-                        echo "Docker is not installed or not found in PATH."
-                        error("Docker command failed")
-                    }
+                withDockerRegistry(credentialsId: 'dockerhub', url: '') {
+                    sh label: '', script: 'docker build -t tien00113/techstack:latest .'
+                    sh label: '', script: 'docker push tien00113/techstack:latest'
                 }
             }
         }
